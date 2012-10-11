@@ -416,7 +416,8 @@
       (FileUtils/forceDelete (File. path))
       (catch java.io.FileNotFoundException ex
         (log-error ex "System said " path " existed, but can't find it to "
-                   "delete. Ignoring.")))))
+                   "delete. Trying again.")
+        (rmr path)))))
 
 (defn rmpath
   "Removes file or directory at the path. Not recursive. Throws exception on failure"
